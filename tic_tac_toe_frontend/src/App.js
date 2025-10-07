@@ -1,47 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Game from './components/Game';
 
-// PUBLIC_INTERFACE
+/**
+ * PUBLIC_INTERFACE
+ * App is the main shell that renders the header and the Game component.
+ * It sets the Ocean Professional theme at the root and provides the centered layout.
+ */
 function App() {
-  const [theme, setTheme] = useState('light');
-
-  // Effect to apply theme to document element
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="app-root">
+      <header className="app-header" role="banner" aria-label="Tic Tac Toe Header">
+        <div className="brand">
+          <div className="brand-icon" aria-hidden="true">⭕</div>
+          <div className="brand-text">
+            <h1 className="title">Tic Tac Toe</h1>
+            <p className="subtitle">Ocean Professional</p>
+          </div>
+        </div>
       </header>
+      <main className="app-main" role="main">
+        <Game />
+      </main>
+      <footer className="app-footer" role="contentinfo">
+        <small>Built with React • Smooth transitions • Accessible</small>
+      </footer>
     </div>
   );
 }

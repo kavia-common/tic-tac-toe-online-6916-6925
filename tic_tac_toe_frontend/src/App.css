@@ -1,104 +1,297 @@
-/* CSS Variables for Theme Management */
-:root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
-}
-
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
-}
-
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+.app-root {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: start;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.app-header {
+  padding: 28px 20px 8px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  background: transparent;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow-soft);
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: radial-gradient(120px 60px at 0% 0%, rgba(37,99,235,0.15), rgba(37,99,235,0) 60%), var(--color-surface);
+  color: var(--color-primary);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.brand-text .title {
+  margin: 0;
+  line-height: 1.1;
+  font-size: 22px;
+  letter-spacing: 0.3px;
+}
+
+.brand-text .subtitle {
+  margin: 0;
+  opacity: 0.7;
+  font-size: 12px;
+}
+
+.app-main {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 22px 16px 32px;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 18px 12px 26px;
+  color: rgba(17,24,39,0.6);
+}
+
+/* Game Card */
+.game-card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 22px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.game-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+/* Status row */
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.status-pill {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(37,99,235,0.02));
+  color: var(--color-primary);
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.theme-toggle:hover {
+.status-pill .dot {
+  width: 8px; height: 8px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.btn {
+  appearance: none;
+  border: 1px solid rgba(17,24,39,0.08);
+  background: #fff;
+  color: var(--color-text);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), color var(--transition), background var(--transition);
+  box-shadow: 0 2px 4px rgba(17,24,39,0.05);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+  border-color: rgba(17,24,39,0.12);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-soft), var(--ring);
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #fff, #f7f9ff);
+  color: var(--color-primary);
+  border-color: rgba(37,99,235,0.25);
+}
+
+.btn-danger {
+  color: var(--color-error);
+  border-color: rgba(239,68,68,0.25);
+  background: linear-gradient(180deg, #fff, #fff7f7);
+}
+
+.segmented {
+  display: inline-flex;
+  border: 1px solid rgba(17,24,39,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.segmented button {
+  border: none;
+  padding: 10px 14px;
+  background: transparent;
+  color: rgba(17,24,39,0.8);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.segmented button[aria-pressed="true"] {
+  background: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(37,99,235,0.02));
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Board */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  background: linear-gradient(145deg, rgba(37,99,235,0.06), rgba(245,158,11,0.06));
+  padding: 14px;
+  border-radius: 18px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.square {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  border: none;
+  border-radius: 14px;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(17,24,39,0.08);
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.square:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-hover);
+}
+
+.square:disabled {
+  cursor: not-allowed;
   opacity: 0.9;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.square .content {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: clamp(32px, 7.2vw, 54px);
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--color-primary);
+  transition: transform 240ms ease, color var(--transition), opacity var(--transition);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.square.o .content {
+  color: var(--color-secondary);
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+.square.winning {
+  background: linear-gradient(180deg, rgba(37,99,235,0.12), rgba(245,158,11,0.12));
+  box-shadow: inset 0 0 0 2px rgba(37,99,235,0.25), var(--shadow-hover);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Scoreboard */
+.scoreboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 16px 0 6px;
+}
+
+.score {
+  background: #fff;
+  padding: 12px 14px;
+  border-radius: 12px;
+  display: grid;
+  gap: 2px;
+  justify-items: center;
+  box-shadow: 0 4px 12px rgba(17,24,39,0.06);
+}
+
+.score .label {
+  font-size: 12px;
+  opacity: 0.65;
+}
+
+.score .value {
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.score.x { border: 1px solid rgba(37,99,235,0.25); color: var(--color-primary); }
+.score.o { border: 1px solid rgba(245,158,11,0.35); color: var(--color-secondary); }
+.score.draw { border: 1px solid rgba(17,24,39,0.12); color: rgba(17,24,39,0.75); }
+
+/* Helper rows */
+.helper-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  gap: 10px;
+  color: rgba(17,24,39,0.7);
+}
+
+.helper-row .hint {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .game-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .status-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controls {
+    justify-content: stretch;
+  }
+
+  .segmented {
+    width: 100%;
+  }
+
+  .segmented button {
+    width: 50%;
   }
 }
